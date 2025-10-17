@@ -30,6 +30,7 @@ This API provides two main functionalities:
 **Key Benefits:**
 - ✅ Fast response time (~100-300ms per query)
 - ✅ Smart incremental processing (only processes new/modified images)
+- ✅ Flexible organization (automatic subdirectory scanning)
 - ✅ Automatic change detection using MD5 hashes
 - ✅ In-memory feature storage for instant search
 - ✅ Production-ready with comprehensive API documentation
@@ -152,11 +153,12 @@ Smart preprocessing that only processes changed images:
 
 ```
 1. Product Images Added to product_images/
+   (Can be in root or any subdirectory)
             ↓
 2. Cron Job Triggers: POST /api/v1/preprocess
             ↓
 3. Incremental Preprocessor:
-   - Scans product_images/
+   - Recursively scans product_images/ and all subdirectories
    - Calculates MD5 hashes
    - Compares with processed_images.json
             ↓
@@ -166,7 +168,7 @@ Smart preprocessing that only processes changed images:
    - Save to products_feature.h5
             ↓
 5. Update Metadata:
-   - Save image info to products_fields.csv
+   - Save image info with full paths to products_fields.csv
    - Update tracking in processed_images.json
             ↓
 6. Reload Features:
@@ -213,10 +215,17 @@ Smart preprocessing that only processes changed images:
   - Preprocessing endpoint for automated updates
   - Upload endpoint for real-time matching
 
+- ✅ **Flexible Image Organization**
+  - Automatic subdirectory scanning
+  - Organize images in any folder structure
+  - Recursive detection of all nested folders
+  - Full path preservation for accurate matching
+
 - ✅ **Smart Incremental Processing**
   - MD5-based change detection
   - Only processes new/modified images
   - Automatic cleanup of deleted images
+  - Works seamlessly with subdirectories
 
 - ✅ **Fast Performance**
   - Pre-computed features (one-time cost)
@@ -286,17 +295,27 @@ Pillow==10.1.0            # Image processing
 
 ### 1. Add Product Images
 
-Place your product images in the `product_images/` directory:
+Place your product images in the `product_images/` directory. **Images can be organized in subdirectories** - the system automatically scans all folders recursively:
 
 ```bash
 product_images/
-├── product_001.jpg
+├── product_001.jpg                    # Root level
 ├── product_002.jpg
-├── product_003.jpg
-└── ...
+├── category1/                         # Organize by category
+│   ├── item1.jpg
+│   └── item2.png
+├── category2/                         
+│   └── subcategory/                   # Nested subdirectories supported
+│       ├── product_a.jpg
+│       └── product_b.jpeg
+└── brand_electronics/                 # Any folder structure works
+    ├── headphones.jpg
+    └── watches/
+        └── smartwatch.JPG
 ```
 
-**Supported formats:** JPG, JPEG, PNG
+**Supported formats:** JPG, JPEG, PNG (case-insensitive)  
+**Organization:** Images can be in the root folder or any nested subdirectory structure
 
 ### 2. Start the API Server
 
@@ -541,14 +560,19 @@ fastapi-similarity-api/
 ├── .gitignore                    # Git ignore rules
 ├── README.md                     # This file
 │
-├── product_images/               # Input: Product images
-│   ├── product_001.jpg
+├── product_images/               # Input: Product images (supports subdirectories)
+│   ├── product_001.jpg           # Root level images
 │   ├── product_002.jpg
-│   └── ...
+│   ├── category1/                # Organize in folders
+│   │   ├── item1.jpg
+│   │   └── item2.png
+│   └── category2/                # Nested subdirectories supported
+│       └── subcategory/
+│           └── product.jpg
 │
 ├── __generated__/                # Auto-generated files
 │   ├── products_feature.h5       # Feature vectors (HDF5)
-│   ├── products_fields.csv       # Image metadata
+│   ├── products_fields.csv       # Image metadata (includes full paths)
 │   └── processed_images.json     # Processing tracking
 │
 ├── uploads/                      # Temporary upload storage
@@ -576,11 +600,13 @@ Main application file containing:
 Intelligent preprocessing with change detection:
 - `IncrementalPreprocessor`: Main preprocessing class
 - MD5-based file change detection
+- Recursive subdirectory scanning
 - Incremental feature updates
 - Automatic cleanup of removed images
 - Processing history tracking
 
 **Key Methods:**
+- `get_all_images()`: Recursively find all images in subdirectories
 - `find_new_images()`: Detect changed images
 - `process_new_images()`: Process only new/modified images
 - `get_status()`: Return preprocessing status
@@ -601,7 +627,8 @@ MobileNet model utilities:
 #### 4. **preprocess.py** - Standalone Script
 
 Standalone preprocessing for initial setup:
-- Process all images at once
+- Process all images at once (including subdirectories)
+- Recursive directory scanning
 - Batch processing with progress bars
 - Error handling and reporting
 - Compatible with incremental system
