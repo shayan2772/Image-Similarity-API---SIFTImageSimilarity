@@ -26,10 +26,12 @@ class ProductFeatureExtractor:
         self.image_extensions = ['*.jpg', '*.jpeg', '*.png', '*.JPG', '*.JPEG', '*.PNG']
     
     def get_all_images(self):
-        """Get all image files from the product directory."""
+        """Get all image files from the product directory (including subdirectories)."""
         images = []
         for ext in self.image_extensions:
-            images.extend(glob(os.path.join(self.image_directory, ext)))
+            # Add ** pattern and recursive=True to search subdirectories
+            pattern = os.path.join(self.image_directory, '**', ext)
+            images.extend(glob(pattern, recursive=True))
         
         # Sort for consistent ordering
         images.sort()

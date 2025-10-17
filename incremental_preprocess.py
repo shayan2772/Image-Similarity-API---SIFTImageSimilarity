@@ -68,10 +68,12 @@ class IncrementalPreprocessor:
             json.dump(tracking_data, f, indent=2)
     
     def get_all_images(self) -> List[str]:
-        """Get all image files from the product directory."""
+        """Get all image files from the product directory (including subdirectories)."""
         images = []
         for ext in self.image_extensions:
-            images.extend(glob(os.path.join(self.image_directory, ext)))
+            # Add ** pattern and recursive=True to search subdirectories
+            pattern = os.path.join(self.image_directory, '**', ext)
+            images.extend(glob(pattern, recursive=True))
         images.sort()
         return images
     
