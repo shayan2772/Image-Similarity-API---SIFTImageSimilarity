@@ -1,0 +1,336 @@
+# ==============================================================================
+# FastAPI Image Similarity API - Git Ignore
+# ==============================================================================
+
+# ==============================================================================
+# Python
+# ==============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ==============================================================================
+# Machine Learning & Data Science
+# ==============================================================================
+# Generated feature files and preprocessed data
+__generated__/
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.pb
+
+# TensorFlow
+*.tfrecord
+*.tflite
+
+# Datasets (large files)
+*.csv
+*.tsv
+*.json
+*.jsonl
+
+# Jupyter notebooks (optional - uncomment if you don't want to track them)
+# *.ipynb
+
+# ==============================================================================
+# Project Specific
+# ==============================================================================
+# Product images - IMPORTANT: Uncomment the line below if you want to track images in git
+product_images/
+
+# Temporary uploads folder (auto-created by API)
+uploads/
+*.tmp
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+
+# Configuration files with secrets
+.env.local
+.env.production
+secrets.json
+config.local.json
+
+# ==============================================================================
+# IDE & Editors
+# ==============================================================================
+# Visual Studio Code
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ==============================================================================
+# Operating System
+# ==============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==============================================================================
+# Backup & Temporary Files
+# ==============================================================================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.tmp
+*~
+
+# ==============================================================================
+# Documentation Build
+# ==============================================================================
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# ==============================================================================
+# Miscellaneous
+# ==============================================================================
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Large media files (optional)
+# *.mp4
+# *.avi
+# *.mov
+# *.wav
+# *.mp3
+
+# ==============================================================================
+# Development & Testing
+# ==============================================================================
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Profiling
+*.prof
+*.lprof
+
+# ==============================================================================
+# Cloud & Deployment
+# ==============================================================================
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Kubernetes
+*.kubeconfig
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ==============================================================================
+# Notes for Developers
+# ==============================================================================
+# Auto-created folders by the preprocessing endpoint:
+# - product_images/  : Contains product images for similarity matching
+# - __generated__/   : Contains preprocessed features (*.h5, *.csv, *.json)
+# - uploads/         : Temporary folder for API file uploads
+#
+# To track product images in git, comment out the line: product_images/
+# To track generated features in git (not recommended), comment out: __generated__/
+# To track uploads in git (not recommended), comment out: uploads/
+# To track environment files, comment out: .env
+# 
+# Remember to never commit:
+# - API keys or secrets
+# - Large binary files (use Git LFS if needed)
+# - Sensitive configuration files
+# - Local development settings
+# - Generated ML features and preprocessed data

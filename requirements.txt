@@ -1,0 +1,85 @@
+# FastAPI Image Similarity API - Requirements
+# Python 3.8+ required
+
+# ==============================================================================
+# Web Framework & Server
+# ==============================================================================
+fastapi==0.104.1                    # Modern web framework with automatic API docs
+uvicorn[standard]==0.24.0           # ASGI server with WebSocket support
+python-multipart==0.0.6             # File upload support for multipart/form-data
+
+# ==============================================================================
+# Deep Learning & Computer Vision
+# ==============================================================================
+tensorflow>=2.16.0                  # Deep learning framework (CPU version)
+# Note: For GPU support, install tensorflow-gpu instead
+# For Apple Silicon (M1/M2/M3): tensorflow-macos works with 2.16+
+
+# ==============================================================================
+# Data Processing & Storage
+# ==============================================================================
+numpy>=1.26.0                       # Array operations and numerical computing
+h5py>=3.10.0                        # HDF5 file format for efficient feature storage
+Pillow==10.1.0                      # Image processing and manipulation
+
+# ==============================================================================
+# Utilities
+# ==============================================================================
+tqdm==4.66.1                        # Progress bars for preprocessing
+
+# ==============================================================================
+# Optional Dependencies
+# ==============================================================================
+# For production deployment:
+# gunicorn>=21.2.0                  # Production WSGI server
+# python-dotenv>=1.0.0              # Environment variable management
+
+# For monitoring:
+# prometheus-fastapi-instrumentator # Prometheus metrics
+# python-json-logger                # JSON logging
+
+# For caching:
+# redis>=5.0.0                      # Redis client for caching features
+
+# For approximate nearest neighbors (for large scale):
+# faiss-cpu>=1.7.4                  # Facebook AI Similarity Search (CPU)
+# annoy>=1.17.0                     # Spotify's approximate nearest neighbors
+
+# ==============================================================================
+# Development Dependencies (optional)
+# ==============================================================================
+# pytest>=7.4.0                     # Testing framework
+# pytest-asyncio>=0.21.0            # Async testing support
+# httpx>=0.24.0                     # Async HTTP client for testing
+# black>=23.7.0                     # Code formatter
+# flake8>=6.1.0                     # Linting
+# mypy>=1.5.0                       # Type checking
+
+# ==============================================================================
+# Package Sizes (approximate)
+# ==============================================================================
+# tensorflow: ~450MB
+# numpy: ~20MB
+# fastapi + uvicorn: ~15MB
+# h5py: ~5MB
+# Total: ~500MB
+
+# ==============================================================================
+# Installation Notes
+# ==============================================================================
+# 1. Create virtual environment:
+#    python3 -m venv venv
+#    source venv/bin/activate  # On Windows: venv\Scripts\activate
+#
+# 2. Install dependencies:
+#    pip install -r requirements.txt
+#
+# 3. For GPU support (optional):
+#    pip install tensorflow-gpu==2.16.2
+#
+# 4. For Apple Silicon Macs (M1/M2/M3):
+#    The unified tensorflow package (2.16+) works on both Intel and Apple Silicon
+#
+# 5. Verify installation:
+#    python -c "import tensorflow; print(tensorflow.__version__)"
+#    python -c "import fastapi; print(fastapi.__version__)"
